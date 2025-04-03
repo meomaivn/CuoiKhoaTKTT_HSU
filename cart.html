@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <title>Giỏ hàng - HSU FOOD</title>
+     <style>
+        /* Đảm bảo footer ở cuối trang */
+        body { display: flex; flex-direction: column; min-height: 100vh; }
+        main { flex: 1; padding-top: 70px; /* Thêm padding vì navbar fixed */}
+        .cart-item-img { max-width: 75px; max-height: 75px; object-fit: contain; margin-right: 15px;}
+        .quantity-input { max-width: 80px; text-align: center;}
+        .table td, .table th { vertical-align: middle; } /* Căn giữa nội dung trong bảng */
+        .price-summary span { font-weight: 600; }
+        .total-price strong { font-size: 1.2rem; }
+        /* Thêm style cho nút xóa nhỏ hơn */
+        .remove-item-btn i { font-size: 0.9rem; }
+        .remove-item-btn { padding: 0.25rem 0.5rem; }
+     </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                 <img src="images/hsu_food_logo.png" alt="HSU FOOD Logo" class="d-inline-block align-top" id="navbarLogo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                 <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"> <a class="nav-link" href="index.html">Trang chủ</a> </li>
+                    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"> Danh mục </a> <div class="dropdown-menu"> <a class="dropdown-item" href="index.html#bia">Bia</a> <a class="dropdown-item" href="index.html#nuoc-suoi">Nước suối</a> <a class="dropdown-item" href="index.html#nuoc-ngot">Nước ngọt</a> <a class="dropdown-item" href="index.html#banh-trang">Bánh tráng</a> </div> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Khuyến mãi</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Liên hệ</a> </li>
+                 </ul>
+                 <ul class="navbar-nav ml-auto">
+                     <li class="nav-item active"> <a class="nav-link" href="cart.html" id="navCartLink"> <i class="fas fa-shopping-cart fa-lg"></i> <span class="badge badge-danger" id="cartItemCount">0</span> </a>
+                     </li>
+                     <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="accountDropdownNav" role="button" data-toggle="dropdown"> <i class="fas fa-user fa-lg"></i> </a> <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item" href="login.html">Đăng nhập</a> <a class="dropdown-item" href="register.html">Đăng ký</a> <div class="dropdown-divider"></div> <a class="dropdown-item" href="order-status.html">Kiểm tra đơn hàng</a> </div> </li>
+                 </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="my-5">
+        <div class="container">
+            <div class="section-title">
+                 <h2>Giỏ hàng của bạn</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                     <div class="card shadow-sm">
+                        <div class="card-body">
+                             <div class="table-responsive">
+                                <table class="table align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" colspan="2" class="border-0">Sản phẩm</th>
+                                            <th scope="col" class="border-0">Đơn giá</th>
+                                            <th scope="col" class="border-0 text-center" style="min-width: 100px;">Số lượng</th>
+                                            <th scope="col" class="border-0 text-right">Thành tiền</th>
+                                            <th scope="col" class="border-0 text-center">Xóa</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cartItemsContainer">
+                                        <tr style="display: none;"><td></td><td>Đang tải...</td><td></td><td></td><td></td><td></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="cartEmptyMessage" class="text-center py-4" style="display: none;">
+                                <i class="fas fa-shopping-basket fa-3x text-muted mb-3"></i>
+                                <p class="lead">Giỏ hàng của bạn hiện đang trống.</p>
+                                <a href="index.html" class="btn btn-primary"><i class="fas fa-home mr-1"></i> Tiếp tục mua sắm</a>
+                            </div>
+                        </div>
+                     </div>
+                </div><div class="col-lg-4">
+                     <div class="card shadow-sm">
+                         <div class="card-header bg-light py-3">
+                            <h5 class="mb-0">Tóm tắt đơn hàng</h5>
+                         </div>
+                        <div class="card-body price-summary">
+                             <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2">
+                                    <span>Tạm tính</span>
+                                    <span id="cartSubtotal">0đ</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0 pb-2">
+                                    <span>Phí vận chuyển</span>
+                                    <span id="cartShipping">0đ</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                    <div>
+                                        <strong>Tổng cộng</strong>
+                                        <p class="mb-0"><small>(Đã bao gồm VAT)</small></p>
+                                    </div>
+                                    <strong class="text-danger total-price"><span id="cartTotal">0đ</span></strong>
+                                </li>
+                             </ul>
+                             <button type="button" class="btn btn-danger btn-block btn-lg" id="checkoutButton" disabled>
+                                <i class="fas fa-credit-card mr-1"></i> Tiến hành thanh toán
+                             </button>
+                        </div>
+                     </div>
+                     <div class="card shadow-sm mt-3">
+                        <div class="card-body">
+                             <p class="mb-2"><strong>Phương thức thanh toán:</strong></p>
+                             <i class="fab fa-cc-visa fa-2x mr-2 text-primary" title="Visa"></i>
+                             <i class="fab fa-cc-mastercard fa-2x mr-2 text-danger" title="Mastercard"></i>
+                             <i class="fas fa-money-bill-wave fa-2x text-success" title="Tiền mặt khi nhận hàng (COD)"></i>
+                             <img src="images/momo-icon.png" height="32" class="ml-2" title="Momo" alt="Momo" style="vertical-align: middle;" onerror="this.style.display='none'">
+                        </div>
+                    </div>
+                </div></div> </div> </main>
+    <footer id="footer">
+         <div class="footer-top"> <div class="container"> <div class="row"> <div class="col-lg-4 col-md-6 footer-contact"><h4>HSU FOOD</h4><p>123 Đường ABC <br>Phường XYZ, Quận 1<br>TP. Hồ Chí Minh <br><br><strong>Điện thoại:</strong> 0987 654 321<br><strong>Email:</strong> info@hsufood.example.com<br></p></div> <div class="col-lg-2 col-md-6 footer-links"><h4>Liên kết</h4><ul><li><i class="fas fa-chevron-right"></i> <a href="#">Trang chủ</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Giới thiệu</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Dịch vụ</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Điều khoản</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Chính sách bảo mật</a></li></ul></div> <div class="col-lg-3 col-md-6 footer-links"><h4>Sản phẩm</h4><ul><li><i class="fas fa-chevron-right"></i> <a href="index.html#bia">Bia các loại</a></li><li><i class="fas fa-chevron-right"></i> <a href="index.html#nuoc-suoi">Nước suối</a></li><li><i class="fas fa-chevron-right"></i> <a href="index.html#nuoc-ngot">Nước ngọt</a></li><li><i class="fas fa-chevron-right"></i> <a href="index.html#banh-trang">Bánh tráng trộn</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Snack ăn vặt</a></li></ul></div> <div class="col-lg-3 col-md-6 footer-newsletter"><h4>Đăng ký nhận tin</h4><p>Nhập email để nhận thông tin khuyến mãi mới nhất</p><form action="" method="post"><input type="email" name="email" class="form-control mb-2"><input type="submit" value="Đăng ký" class="btn btn-danger"></form><div class="social-links mt-3"><a href="#" class="twitter"><i class="fab fa-twitter"></i></a> <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a> <a href="#" class="instagram"><i class="fab fa-instagram"></i></a> <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a></div></div> </div> </div> </div>
+         <div class="container"> <div class="copyright">&copy; Copyright <strong><span>HSU FOOD</span></strong>. All Rights Reserved</div> <div class="credits"></div> </div>
+     </footer><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+// --- **** BỔ SUNG: logo **** ---
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const brand = document.querySelector('.navbar-brand');
+    if (brand) {
+        brand.innerHTML = '<img src="images/logo-hsu-food.png" alt="HSU FOOD">';
+    }
+});
+</script>    
+// --- **** kết thúc chèn logo **** ---
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const cartEmptyMessage = document.getElementById('cartEmptyMessage');
+            const cartSubtotalEl = document.getElementById('cartSubtotal');
+            const cartShippingEl = document.getElementById('cartShipping');
+            const cartTotalEl = document.getElementById('cartTotal');
+            const cartBadge = document.getElementById('cartItemCount'); // Navbar badge
+            const checkoutButton = document.getElementById('checkoutButton');
+            const SHIPPING_FEE = 15000; // Phí ship cố định ví dụ
+
+            // --- Helper Functions ---
+            function getCart() {
+                const cart = localStorage.getItem('hsuFoodCart');
+                // Thêm try-catch để xử lý nếu dữ liệu trong localStorage không hợp lệ
+                try {
+                    return cart ? JSON.parse(cart) : [];
+                } catch (e) {
+                    console.error("Lỗi khi đọc giỏ hàng từ localStorage:", e);
+                    localStorage.removeItem('hsuFoodCart'); // Xóa dữ liệu lỗi
+                    return [];
+                }
+            }
+
+            function saveCart(cart) {
+                 // Đảm bảo cart là một mảng trước khi lưu
+                 if (!Array.isArray(cart)) {
+                     console.error("saveCart: Dữ liệu không phải là mảng.");
+                     return;
+                 }
+                 try {
+                    localStorage.setItem('hsuFoodCart', JSON.stringify(cart));
+                    renderCart(); // Luôn vẽ lại giỏ hàng sau khi lưu
+                 } catch (e) {
+                     console.error("Lỗi khi lưu giỏ hàng vào localStorage:", e);
+                     // Có thể thông báo lỗi cho người dùng nếu localStorage đầy
+                     alert("Không thể lưu giỏ hàng, localStorage có thể đã đầy.");
+                 }
+            }
+
+            function formatPrice(price) {
+                if (isNaN(price) || price === null) {
+                    return '0đ';
+                }
+                 return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+            }
+
+            // --- **** HÀM LẤY ẢNH  **** ---
+            function getProductImage(productId) {
+                if (!productId || typeof productId !== 'string') {
+                     return 'images/placeholder.png';
+                 }
+                 // Cập nhật danh sách này với ĐÚNG ID và đường dẫn ảnh của BẠN
+                const knownImages = {
+                    'bia01': 'images/bia_heineken.jpg',
+                    'bia02': 'images/bia_tiger.jpg', // Đường dẫn cho Tiger
+                    'bia03': 'images/bia_saigon.jpg',
+                    'bia04': 'images/bia_budweiser.jpg',
+                    'suoi01': 'images/nuoc_suoi_aquafina.jpg', // Đường dẫn cho Aquafina
+                    'suoi02': 'https://nuockhoangducphat.com/wp-content/uploads/2013/06/lavie15lit.jpg',
+                    'suoi03': 'images/nuoc_suoi_vinhhao.jpg',
+                    'suoi04': 'images/nuoc_suoi_dasani.jpg',
+                    'nuoc01': 'images/coca_cola.jpg',
+                    'nuoc02': 'images/pepsi.jpg',
+                    'nuoc03': 'images/7up.jpg',
+                    'nuoc04': 'images/sting_dau.jpg',
+                    'btt01': 'images/banh_trang_tron_thap_cam.jpg',
+                    'btt02': 'images/banh_trang_cuon.jpg',
+                    'btt03': 'images/banh_trang_long_an.jpg',
+                    'btt04': 'images/banh_trang_phoi_suong.jpg',
+                    'btt05': 'images/banh_trang_tron_sate.jpg',
+                    'btt06': 'images/banh_trang_nuong.jpg',
+                    'btt07': 'images/banh_trang_me.jpg',
+                    'btt10': 'images/banh_trang_deo_tom.jpg'
+                    // Thêm các ánh xạ khác nếu cần...
+                };
+                return knownImages[productId] || 'images/placeholder.png'; // Trả về placeholder nếu không có trong danh sách
+            }
+            // --- **** Hết hàm lấy ảnh **** ---
+
+
+            // --- Hàm Render Cart ---
+            function renderCart() {
+                console.log("Bắt đầu render giỏ hàng..."); // Log để debug
+                const cart = getCart();
+                console.log("Dữ liệu giỏ hàng đọc từ localStorage:", cart); // Log dữ liệu đọc được
+
+                // Đảm bảo các phần tử DOM tồn tại trước khi thao tác
+                if (!cartItemsContainer || !cartEmptyMessage || !cartSubtotalEl || !cartShippingEl || !cartTotalEl || !cartBadge || !checkoutButton) {
+                    console.error("Một hoặc nhiều phần tử DOM của giỏ hàng không tìm thấy!");
+                    return;
+                }
+
+                cartItemsContainer.innerHTML = ''; // Xóa item cũ
+                let subtotal = 0;
+                let totalQuantity = 0;
+
+                if (!Array.isArray(cart) || cart.length === 0) { // Kiểm tra cart là mảng và có phần tử không
+                    console.log("Giỏ hàng rỗng hoặc không hợp lệ.");
+                    cartEmptyMessage.style.display = 'block';
+                    checkoutButton.disabled = true;
+                    // Reset giá trị tổng tiền khi giỏ hàng trống
+                    subtotal = 0;
+                    totalQuantity = 0;
+                } else {
+                    cartEmptyMessage.style.display = 'none';
+                    checkoutButton.disabled = false;
+
+                    cart.forEach((item, index) => {
+                         // Kiểm tra kỹ từng item trước khi xử lý
+                         if (!item || typeof item.price !== 'number' || typeof item.quantity !== 'number' || !item.id) {
+                           console.warn("Bỏ qua item không hợp lệ trong giỏ hàng:", item, "tại index:", index);
+                           return; // Bỏ qua và xử lý item tiếp theo
+                         }
+                        const itemTotal = item.price * item.quantity;
+                        subtotal += itemTotal;
+                        totalQuantity += item.quantity;
+
+                        const imageSrc = getProductImage(item.id); // Lấy đường dẫn ảnh
+
+                        const row = document.createElement('tr');
+                        // Đã sửa lỗi nút xóa dùng fas fa-times thay vì fas fa-trash-alt
+                        row.innerHTML = `
+                            <td style="width: 90px;"><img src="${imageSrc}" alt="${item.name || 'Sản phẩm'}" class="cart-item-img rounded" onerror="this.src='images/placeholder.png';"></td>
+                            <td>${item.name || 'Không có tên'}<br><small class="text-muted">ID: ${item.id}</small></td>
+                            <td>${formatPrice(item.price)}</td>
+                            <td class="text-center"><input type="number" class="form-control form-control-sm quantity-input" value="${item.quantity}" min="1" data-index="${index}"></td>
+                            <td class="text-right">${formatPrice(itemTotal)}</td>
+                            <td class="text-center"><button class="btn btn-sm btn-outline-danger remove-item-btn" data-index="${index}" title="Xóa sản phẩm"><i class="fas fa-times"></i></button></td>
+                        `;
+                        cartItemsContainer.appendChild(row);
+                    });
+                    console.log("Đã render xong các sản phẩm.");
+                }
+
+                // --- Cập nhật tổng tiền ---
+                const shippingFee = (subtotal > 0) ? SHIPPING_FEE : 0;
+                const total = subtotal + shippingFee;
+
+                cartSubtotalEl.textContent = formatPrice(subtotal);
+                cartShippingEl.textContent = formatPrice(shippingFee);
+                cartTotalEl.textContent = formatPrice(total);
+                cartBadge.textContent = totalQuantity; // Cập nhật navbar badge
+                console.log("Đã cập nhật tổng tiền và số lượng.");
+            }
+
+            // --- Gắn Event Listeners ---
+            if (cartItemsContainer) {
+                // Thay đổi số lượng
+                cartItemsContainer.addEventListener('change', function(event) {
+                    if (event.target.classList.contains('quantity-input')) {
+                        const index = parseInt(event.target.dataset.index);
+                        const newQuantity = parseInt(event.target.value);
+                        let cart = getCart();
+
+                        if (!isNaN(index) && newQuantity >= 1 && cart[index]) {
+                            console.log(`Thay đổi số lượng item ${index} thành ${newQuantity}`);
+                            cart[index].quantity = newQuantity;
+                            saveCart(cart); // Lưu và vẽ lại
+                        } else if (cart[index]) {
+                            console.log(`Số lượng không hợp lệ, đặt lại cho item ${index}`);
+                            event.target.value = cart[index].quantity; // Đặt lại giá trị cũ nếu nhập sai
+                        }
+                    }
+                });
+
+                // Nút xóa sản phẩm
+                cartItemsContainer.addEventListener('click', function(event) {
+                    const removeButton = event.target.closest('.remove-item-btn');
+                    if (removeButton) {
+                        const index = parseInt(removeButton.dataset.index);
+                        let cart = getCart();
+                        if (!isNaN(index) && cart[index]) {
+                            if (confirm(`Bạn có chắc muốn xóa "${cart[index].name}" khỏi giỏ hàng?`)) {
+                                console.log(`Xóa item tại index ${index}`);
+                                cart.splice(index, 1); // Xóa khỏi mảng
+                                saveCart(cart); // Lưu và vẽ lại
+                            }
+                        }
+                    }
+                });
+            }
+
+             // --- Nút thanh toán ---
+             if(checkoutButton) {
+                 checkoutButton.addEventListener('click', function() {
+                     if (getCart().length > 0) {
+                         
+                         window.location.href = 'checkout.html';
+                     } else {
+                         alert('Giỏ hàng của bạn đang trống!');
+                     }
+                 });
+             }
+
+            // --- Gọi hàm render lần đầu khi tải trang ---
+            renderCart();
+
+        });
+    </script>
+    </body>
+</html>

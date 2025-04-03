@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <title>Thanh toán đơn hàng - HSU FOOD</title>
+    <style>
+        /* Đảm bảo footer ở cuối trang */
+        body { display: flex; flex-direction: column; min-height: 100vh; padding-top: 70px;}
+        main { flex: 1; }
+        .summary-item-img { width: 40px; height: 40px; object-fit: contain; margin-right: 10px;}
+        .order-summary-card .list-group-item { padding: 0.75rem 0; } /* Adjust padding */
+        .order-summary-card .card-header { background-color: #f8f9fa; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+        <div class="container"> <a class="navbar-brand" href="index.html"> <img src="images/hsu_food_logo.png" alt="HSU FOOD Logo" class="d-inline-block align-top" id="navbarLogo"> </a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"> <span class="navbar-toggler-icon"></span> </button> <div class="collapse navbar-collapse" id="navbarNav"> <ul class="navbar-nav mx-auto"> <li class="nav-item"> <a class="nav-link" href="index.html">Trang chủ</a> </li> <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"> Danh mục </a> <div class="dropdown-menu"> <a class="dropdown-item" href="index.html#bia">Bia</a> <a class="dropdown-item" href="index.html#nuoc-suoi">Nước suối</a> <a class="dropdown-item" href="index.html#nuoc-ngot">Nước ngọt</a> <a class="dropdown-item" href="index.html#banh-trang">Bánh tráng</a> </div> </li> <li class="nav-item"> <a class="nav-link" href="flash-sale.html">Khuyến mãi</a> </li> <li class="nav-item"> <a class="nav-link" href="#">Liên hệ</a> </li> </ul> <ul class="navbar-nav ml-auto"> <li class="nav-item"> <a class="nav-link" href="cart.html" id="navCartLink"> <i class="fas fa-shopping-cart fa-lg"></i> <span class="badge badge-danger" id="cartItemCount">0</span> </a> </li> <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="accountDropdownNav" role="button" data-toggle="dropdown"> <i class="fas fa-user fa-lg"></i> </a> <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item" href="login.html">Đăng nhập</a> <a class="dropdown-item" href="register.html">Đăng ký</a> <div class="dropdown-divider"></div> <a class="dropdown-item" href="order-status.html">Kiểm tra đơn hàng</a> </div> </li> </ul> </div> </div>
+    </nav>
+    <main class="my-5">
+        <div class="container">
+            <div class="section-title">
+                <h2>Thanh toán đơn hàng</h2>
+            </div>
+
+            <div id="checkoutSuccessMessage" class="alert alert-success text-center" role="alert" style="display: none;">
+                 <h4 class="alert-heading"><i class="fas fa-check-circle"></i> Đặt hàng thành công!</h4>
+                 <p>Cảm ơn bạn đã mua hàng tại HSU FOOD. Đơn hàng của bạn đang được xử lý.</p>
+                 <hr>
+                 <p class="mb-0">Bạn có thể xem trạng thái đơn hàng hoặc quay về trang chủ.</p>
+                 <a href="order-status.html" class="btn btn-info mt-2">Kiểm tra trạng thái đơn hàng</a>
+                 <a href="index.html" class="btn btn-primary mt-2">Về trang chủ</a>
+            </div>
+
+            <div class="row" id="checkoutContent">
+                <div class="col-lg-7 mb-4 mb-lg-0">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-light py-3">
+                             <h5 class="mb-0"><i class="fas fa-map-marker-alt mr-2"></i> Thông tin giao hàng</h5>
+                        </div>
+                        <div class="card-body">
+                             <form id="checkoutForm" class="needs-validation" novalidate>
+                                <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="fullName">Họ và tên người nhận</label>
+                                        <input type="text" class="form-control" id="fullName" placeholder="Nguyễn Văn A" required>
+                                        <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                     <label for="phone">Số điện thoại</label>
+                                     <input type="tel" class="form-control" id="phone" placeholder="09xxxxxxxx" required pattern="[0-9]{10,11}">
+                                     <div class="invalid-feedback">Vui lòng nhập số điện thoại hợp lệ (10-11 số).</div>
+                                </div>
+                                <div class="mb-3">
+                                     <label for="address">Địa chỉ nhận hàng</label>
+                                     <textarea class="form-control" id="address" rows="3" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố" required></textarea>
+                                     <div class="invalid-feedback">Vui lòng nhập địa chỉ nhận hàng.</div>
+                                </div>
+                                 <div class="mb-3">
+                                     <label for="notes">Ghi chú đơn hàng (tùy chọn)</label>
+                                     <textarea class="form-control" id="notes" rows="2" placeholder="Ví dụ: Giao hàng giờ hành chính..."></textarea>
+                                </div>
+                                </form>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-light py-3">
+                             <h5 class="mb-0"><i class="fas fa-credit-card mr-2"></i> Chọn phương thức thanh toán</h5>
+                        </div>
+                        <div class="card-body">
+                             <div class="d-block my-3">
+                                <div class="custom-control custom-radio mb-2">
+                                     <input id="cod" name="paymentMethod" type="radio" class="custom-control-input" value="cod" checked required>
+                                     <label class="custom-control-label" for="cod">
+                                         <i class="fas fa-money-bill-wave text-success mr-2"></i> Thanh toán khi nhận hàng (COD)
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio mb-2">
+                                     <input id="momo" name="paymentMethod" type="radio" class="custom-control-input" value="momo" required>
+                                     <label class="custom-control-label" for="momo">
+                                         <img src="images/momo-icon.png" height="20" class="mr-2" alt="Momo" onerror="this.style.display='none'"> Ví điện tử Momo
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                     <input id="bank" name="paymentMethod" type="radio" class="custom-control-input" value="bank" required>
+                                     <label class="custom-control-label" for="bank">
+                                        <i class="fas fa-university text-info mr-2"></i> Chuyển khoản ngân hàng
+                                    </label>
+                                     <div id="bankInfo" class="mt-2 text-muted small" style="display: none;">
+                                         <p class="mb-1">Ngân hàng: Vietcombank</p>
+                                         <p class="mb-1">Số tài khoản: 1234567890</p>
+                                         <p class="mb-0">Chủ tài khoản: HSU FOOD</p>
+                                         <p class="mb-0">Nội dung: Thanh toán đơn hàng [Mã đơn hàng]</p>
+                                     </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div><div class="col-lg-5">
+                    <div class="card shadow-sm order-summary-card">
+                         <div class="card-header bg-light py-3">
+                            <h5 class="mb-0"><i class="fas fa-receipt mr-2"></i> Đơn hàng của bạn</h5>
+                         </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush" id="checkoutOrderSummaryItems">
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0 text-muted">
+                                    <span>Đang tải giỏ hàng...</span>
+                                </li>
+                            </ul>
+                        </div>
+                         <div class="card-footer bg-white price-summary">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2">
+                                    <span>Tạm tính</span>
+                                    <span id="checkoutSubtotal">0đ</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2">
+                                    <span>Phí vận chuyển</span>
+                                    <span id="checkoutShipping">0đ</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                    <div>
+                                        <strong>Tổng cộng</strong>
+                                        <p class="mb-0"><small>(Đã bao gồm VAT)</small></p>
+                                    </div>
+                                    <strong class="text-danger total-price"><span id="checkoutTotal">0đ</span></strong>
+                                </li>
+                            </ul>
+                         </div>
+                    </div>
+                     <button class="btn btn-danger btn-lg btn-block mt-4" type="submit" form="checkoutForm" id="placeOrderButton"> <i class="fas fa-check-circle mr-1"></i> Đặt hàng
+                     </button>
+                </div></div> </div> </main>
+    <footer id="footer">
+         <div class="footer-top"> <div class="container"> <div class="row"> <div class="col-lg-4 col-md-6 footer-contact"><h4>HSU FOOD</h4><p>123 Đường ABC <br>Phường XYZ, Quận 1<br>TP. Hồ Chí Minh <br><br><strong>Điện thoại:</strong> 0987 654 321<br><strong>Email:</strong> info@hsufood.example.com<br></p></div> <div class="col-lg-2 col-md-6 footer-links"><h4>Liên kết</h4><ul><li><i class="fas fa-chevron-right"></i> <a href="#">Trang chủ</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Giới thiệu</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Dịch vụ</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Điều khoản</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Chính sách bảo mật</a></li></ul></div> <div class="col-lg-3 col-md-6 footer-links"><h4>Sản phẩm</h4><ul><li><i class="fas fa-chevron-right"></i> <a href="index.html#bia">Bia các loại</a></li><li><i class="fas fa-chevron-right"></i> <a href="index.html#nuoc-suoi">Nước suối</a></li><li><i class="fas fa-chevron-right"></i> <a href="index.html#nuoc-ngot">Nước ngọt</a></li><li><i class="fas fa-chevron-right"></i> <a href="index.html#banh-trang">Bánh tráng trộn</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Snack ăn vặt</a></li></ul></div> <div class="col-lg-3 col-md-6 footer-newsletter"><h4>Đăng ký nhận tin</h4><p>Nhập email để nhận thông tin khuyến mãi mới nhất</p><form action="" method="post"><input type="email" name="email" class="form-control mb-2"><input type="submit" value="Đăng ký" class="btn btn-danger"></form><div class="social-links mt-3"><a href="#" class="twitter"><i class="fab fa-twitter"></i></a> <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a> <a href="#" class="instagram"><i class="fab fa-instagram"></i></a> <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a></div></div> </div> </div> </div>
+         <div class="container"> <div class="copyright">&copy; Copyright <strong><span>HSU FOOD</span></strong>. All Rights Reserved</div> <div class="credits"></div> </div>
+     </footer><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+// --- **** BỔ SUNG: logo **** ---
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const brand = document.querySelector('.navbar-brand');
+    if (brand) {
+        brand.innerHTML = '<img src="images/logo-hsu-food.png" alt="HSU FOOD" >';
+    }
+});
+</script>    
+// --- **** kết thúc chèn logo **** ---
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          // Elements
+          const checkoutForm = document.getElementById('checkoutForm');
+          const summaryItemsContainer = document.getElementById('checkoutOrderSummaryItems');
+          const subtotalEl = document.getElementById('checkoutSubtotal');
+          const shippingEl = document.getElementById('checkoutShipping');
+          const totalEl = document.getElementById('checkoutTotal');
+          const placeOrderButton = document.getElementById('placeOrderButton');
+          const cartBadge = document.getElementById('cartItemCount'); // Navbar badge
+          const checkoutContent = document.getElementById('checkoutContent'); // Div chứa nội dung checkout
+          const successMessageDiv = document.getElementById('checkoutSuccessMessage'); // Div thông báo thành công
+          const bankInfoDiv = document.getElementById('bankInfo'); // Div thông tin bank
+          const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
+
+          const SHIPPING_FEE = 15000; // Phí ship cố định ví dụ
+
+          // --- Helper Functions ---
+          function getCart() {
+              const cart = localStorage.getItem('hsuFoodCart');
+              try { return cart ? JSON.parse(cart) : []; } catch (e) { console.error("Lỗi parse JSON:", e); localStorage.removeItem('hsuFoodCart'); return []; }
+          }
+          function formatPrice(price) {
+              if (isNaN(price) || price === null) return '0đ';
+              return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+          }
+          // (Optional: getProductImage function if needed for summary)
+          function getProductImage(productId) {
+              if (!productId || typeof productId !== 'string') return 'images/placeholder.png';
+              const knownImages = { 'bia01': 'images/bia_heineken.jpg', 'bia02': 'images/bia_tiger.jpg', 'bia03': 'images/bia_saigon.jpg', 'bia04': 'images/bia_budweiser.jpg', 'suoi01': 'images/nuoc_suoi_aquafina.jpg', 'suoi02': 'images/nuoc_suoi_lavie.jpg', 'suoi03': 'images/nuoc_suoi_vinhhao.jpg', 'suoi04': 'images/nuoc_suoi_dasani.jpg', 'nuoc01': 'images/coca_cola.jpg', 'nuoc02': 'images/pepsi.jpg', 'nuoc03': 'images/7up.jpg', 'nuoc04': 'images/sting_dau.jpg', 'btt01': 'images/banh_trang_tron_thap_cam.jpg', 'btt02': 'images/banh_trang_cuon.jpg', 'btt03': 'images/banh_trang_long_an.jpg', 'btt04': 'images/banh_trang_phoi_suong.jpg', 'btt05': 'images/banh_trang_tron_sate.jpg', 'btt06': 'images/banh_trang_nuong.jpg', 'btt07': 'images/banh_trang_me.jpg', 'btt10': 'images/banh_trang_deo_tom.jpg' };
+              return knownImages[productId] || 'images/placeholder.png';
+          }
+           function updateCartBadgeCount() {
+              const cart = getCart(); let totalQuantity = 0;
+              if (Array.isArray(cart)) { cart.forEach(item => { if (item && typeof item.quantity === 'number') { totalQuantity += item.quantity; } }); }
+              if (cartBadge) { cartBadge.textContent = totalQuantity; }
+          }
+
+          // --- Render Order Summary ---
+          function renderOrderSummary() {
+              const cart = getCart();
+              summaryItemsContainer.innerHTML = ''; // Clear old summary
+              let subtotal = 0;
+
+              if (!Array.isArray(cart) || cart.length === 0) {
+                   // Nếu giỏ hàng trống, có thể hiện thông báo hoặc vô hiệu hóa trang
+                   console.warn("Giỏ hàng trống, không thể thanh toán.");
+                   summaryItemsContainer.innerHTML = '<li class="list-group-item text-muted">Không có sản phẩm nào trong giỏ.</li>';
+                   if (subtotalEl) subtotalEl.textContent = formatPrice(0);
+                   if (shippingEl) shippingEl.textContent = formatPrice(0);
+                   if (totalEl) totalEl.textContent = formatPrice(0);
+                   if (placeOrderButton) placeOrderButton.disabled = true; // Vô hiệu hóa nút đặt hàng
+                   updateCartBadgeCount();
+                   return false; // Báo hiệu giỏ hàng trống
+              }
+
+              // Giỏ hàng có sản phẩm
+              cart.forEach(item => {
+                   if (!item || typeof item.price !== 'number' || typeof item.quantity !== 'number') return;
+                   subtotal += item.price * item.quantity;
+                   const imageSrc = getProductImage(item.id); // Lấy ảnh (tùy chọn hiển thị ảnh)
+
+                   const li = document.createElement('li');
+                   li.className = 'list-group-item d-flex justify-content-between align-items-center px-0';
+                   li.innerHTML = `
+                       <div class="d-flex align-items-center">
+                           <img src="${imageSrc}" alt="${item.name || ''}" class="summary-item-img rounded mr-2" onerror="this.src='images/placeholder.png'">
+                           <div>
+                               <span class="font-weight-bold small d-block">${item.name || 'Sản phẩm'}</span>
+                               <small class="text-muted">Số lượng: ${item.quantity}</small>
+                           </div>
+                       </div>
+                       <span>${formatPrice(item.price * item.quantity)}</span>
+                   `;
+                   summaryItemsContainer.appendChild(li);
+              });
+
+              const shippingFee = (subtotal > 0) ? SHIPPING_FEE : 0;
+              const total = subtotal + shippingFee;
+
+              if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
+              if (shippingEl) shippingEl.textContent = formatPrice(shippingFee);
+              if (totalEl) totalEl.textContent = formatPrice(total);
+              if (placeOrderButton) placeOrderButton.disabled = false; // Kích hoạt nút đặt hàng
+              updateCartBadgeCount();
+              return true; // Báo hiệu giỏ hàng có sản phẩm
+          }
+
+
+          // --- Form Submission and Validation ---
+          if (checkoutForm) {
+              checkoutForm.addEventListener('submit', function(event) {
+                  event.preventDefault();
+                  event.stopPropagation();
+
+                  // Perform Bootstrap validation check
+                  if (checkoutForm.checkValidity() === false) {
+                      checkoutForm.classList.add('was-validated');
+                      alert('Vui lòng điền đầy đủ và chính xác thông tin giao hàng.');
+                      return; // Stop if form is invalid
+                  }
+
+                  // --- Simulate Order Placement ---
+                  console.log('Form hợp lệ, tiến hành đặt hàng (prototype)...');
+
+                  // Lấy thông tin từ form (ví dụ)
+                  const customerInfo = {
+                      name: document.getElementById('fullName').value,
+                      phone: document.getElementById('phone').value,
+                      address: document.getElementById('address').value,
+                      notes: document.getElementById('notes').value,
+                      paymentMethod: document.querySelector('input[name="paymentMethod"]:checked')?.value || 'N/A'
+                  };
+                  console.log("Thông tin khách hàng:", customerInfo);
+                  console.log("Giỏ hàng:", getCart());
+
+                  // 1. Clear the cart from localStorage
+                  localStorage.removeItem('hsuFoodCart');
+                  console.log("Đã xóa giỏ hàng khỏi localStorage.");
+
+                  // 2. Update navbar badge count
+                  updateCartBadgeCount(); // Should become 0
+
+                  // 3. Hide the checkout content
+                  if (checkoutContent) checkoutContent.style.display = 'none';
+
+                  // 4. Show the success message
+                  if (successMessageDiv) successMessageDiv.style.display = 'block';
+
+                  // (Không cần thêm 'was-validated' nữa vì đã thành công)
+
+              }, false);
+          }
+
+           // --- Payment Method Logic (Show/Hide Bank Info) ---
+          if (paymentRadios && bankInfoDiv) {
+              paymentRadios.forEach(radio => {
+                  radio.addEventListener('change', function() {
+                      if (document.getElementById('bank').checked) {
+                          bankInfoDiv.style.display = 'block';
+                      } else {
+                          bankInfoDiv.style.display = 'none';
+                      }
+                  });
+              });
+          }
+
+          // --- Initial Render and Check ---
+          const isCartNotEmpty = renderOrderSummary(); // Render lần đầu và kiểm tra giỏ hàng
+          if (!isCartNotEmpty) {
+              // Nếu giỏ hàng trống ngay từ đầu, có thể chuyển hướng về trang giỏ hàng hoặc trang chủ
+              alert("Giỏ hàng trống! Bạn sẽ được chuyển về trang chủ.");
+              window.location.href = 'index.html';
+          }
+
+      });
+    </script>
+    </body>
+</html>
