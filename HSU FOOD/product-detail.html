@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <link rel="stylesheet" href="css/custom.css">
+    <title>Chi tiết sản phẩm - HSU FOOD</title>
+     <style>
+         /* Đảm bảo footer ở cuối trang */
+         body { display: flex; flex-direction: column; min-height: 100vh; padding-top: 70px; /* Thêm padding vì navbar fixed */}
+         main { flex: 1; }
+         .product-image-detail { max-height: 450px; object-fit: contain; border: 1px solid #eee; border-radius: .25rem; padding: 1rem; background: #fff; }
+         .quantity-input-detail { max-width: 100px; }
+         .product-info-detail h2 { font-weight: 600; margin-bottom: 0.75rem; }
+         .product-info-detail .product-id { font-size: 0.9rem; color: #6c757d; margin-bottom: 1rem; }
+         .product-info-detail .price { font-size: 1.8rem; font-weight: 700; color: #dc3545; margin-bottom: 1.5rem; }
+         .product-info-detail .description { margin-bottom: 1.5rem; line-height: 1.6; }
+         /* Style cho sản phẩm liên quan - có thể dùng lại .product-item từ custom.css */
+         .related-products .product-item .product-img { height: 180px; /* Ảnh nhỏ hơn */ }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+          <div class="container"> <a class="navbar-brand font-weight-bold" href="index.html">HSU FOOD</a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"> <span class="navbar-toggler-icon"></span> </button> <div class="collapse navbar-collapse" id="navbarNav"> <ul class="navbar-nav mx-auto"> <li class="nav-item"> <a class="nav-link" href="index.html">Trang chủ</a> </li> <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"> Danh mục </a> <div class="dropdown-menu"> <a class="dropdown-item" href="index.html#bia">Bia</a> <a class="dropdown-item" href="index.html#nuoc-suoi">Nước suối</a> <a class="dropdown-item" href="index.html#nuoc-ngot">Nước ngọt</a> <a class="dropdown-item" href="index.html#banh-trang">Bánh tráng</a> </div> </li> <li class="nav-item"> <a class="nav-link" href="flash-sale.html">Khuyến mãi</a> </li> <li class="nav-item"> <a class="nav-link" href="#">Liên hệ</a> </li> </ul> <ul class="navbar-nav ml-auto"> <li class="nav-item"> <a class="nav-link" href="cart.html" id="navCartLink"> <i class="fas fa-shopping-cart fa-lg"></i> <span class="badge badge-danger" id="cartItemCount">0</span> </a> </li> <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="accountDropdownNav" role="button" data-toggle="dropdown"> <i class="fas fa-user fa-lg"></i> </a> <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item" href="login.html">Đăng nhập</a> <a class="dropdown-item" href="register.html">Đăng ký</a> <div class="dropdown-divider"></div> <a class="dropdown-item" href="order-status.html">Kiểm tra đơn hàng</a> </div> </li> </ul> </div> </div>
+    </nav>
+    <main class="my-5">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-light">
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="index.html#products">Sản phẩm</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" id="product-detail-name-breadcrumb">Đang tải...</li>
+                </ol>
+            </nav>
+
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="images/placeholder.png" class="img-fluid product-image-detail" alt="Tên sản phẩm" id="product-detail-image" onerror="this.src='images/placeholder.png';">
+                </div>
+                <div class="col-lg-6 product-info-detail">
+                    <h2 id="product-detail-name">Đang tải tên sản phẩm...</h2>
+                     <p class="product-id" id="product-detail-id">Mã sản phẩm: LOADING...</p>
+                     <p class="price" id="product-detail-price">0đ</p>
+                     <p class="description" id="product-detail-description">Đang tải mô tả...</p>
+                     <hr>
+                     <div class="form-group row align-items-center mb-4">
+                         <label for="quantity" class="col-sm-3 col-form-label"><strong>Số lượng:</strong></label>
+                         <div class="col-sm-4">
+                            <input type="number" class="form-control text-center quantity-input-detail" id="quantity" value="1" min="1">
+                         </div>
+                     </div>
+                     <button class="btn btn-danger btn-lg btn-block add-to-cart-btn-detail" id="addToCartDetailButton" disabled>
+                         <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
+                    </button>
+                    <div id="addToCartFeedback" class="mt-2 text-success font-weight-bold" style="display: none;"></div>
+                     <div id="productNotFound" class="alert alert-warning mt-3" style="display: none;">
+                         <i class="fas fa-exclamation-triangle mr-2"></i> Xin lỗi, không tìm thấy thông tin sản phẩm này.
+                     </div>
+                </div>
+            </div>
+
+            <div class="mt-5 related-products">
+                 <div class="section-title">
+                     <h2>Sản phẩm liên quan</h2>
+                 </div>
+                 <div class="row" id="relatedProductsContainer">
+                    </div>
+            </div>
+            </div> </main>
+
+    <footer id="footer">
+         <div class="footer-top"> <div class="container"> <div class="row"> <div class="col-lg-4 col-md-6 footer-contact"><h4>HSU FOOD</h4><p>123 Đường ABC <br>Phường XYZ, Quận 1<br>TP. Hồ Chí Minh <br><br><strong>Điện thoại:</strong> 0987 654 321<br><strong>Email:</strong> info@hsufood.example.com<br></p></div> <div class="col-lg-2 col-md-6 footer-links"><h4>Liên kết</h4><ul><li><i class="fas fa-chevron-right"></i> <a href="#">Trang chủ</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Giới thiệu</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Dịch vụ</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Điều khoản</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Chính sách bảo mật</a></li></ul></div> <div class="col-lg-3 col-md-6 footer-links"><h4>Sản phẩm</h4><ul><li><i class="fas fa-chevron-right"></i> <a href="index.html#bia">Bia các loại</a></li><li><i class="fas fa-chevron-right"></i> <a href="index.html#nuoc-suoi">Nước suối</a></li><li><i class="fas fa-chevron-right"></i> <a href="index.html#nuoc-ngot">Nước ngọt</a></li><li><i class="fas fa-chevron-right"></i> <a href="index.html#banh-trang">Bánh tráng trộn</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Snack ăn vặt</a></li></ul></div> <div class="col-lg-3 col-md-6 footer-newsletter"><h4>Đăng ký nhận tin</h4><p>Nhập email để nhận thông tin khuyến mãi mới nhất</p><form action="" method="post"><input type="email" name="email" class="form-control mb-2"><input type="submit" value="Đăng ký" class="btn btn-danger"></form><div class="social-links mt-3"><a href="#" class="twitter"><i class="fab fa-twitter"></i></a> <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a> <a href="#" class="instagram"><i class="fab fa-instagram"></i></a> <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a></div></div> </div> </div> </div>
+         <div class="container"> <div class="copyright">&copy; Copyright <strong><span>HSU FOOD</span></strong>. All Rights Reserved</div> <div class="credits"></div> </div>
+     </footer><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+// --- **** BỔ SUNG: logo **** ---
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const brand = document.querySelector('.navbar-brand');
+    if (brand) {
+        brand.innerHTML = '<img src="images/logo-hsu-food.png" alt="HSU FOOD">';
+    }
+});
+</script>    
+// --- **** kết thúc chèn logo **** ---
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const brand = document.querySelector('.navbar-brand');
+    if (brand) {
+        brand.innerHTML = '<img src="images/logo-hsu-food.png" alt="HSU FOOD" height="60px" width= "200px">';
+    }
+});
+</script>    
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lấy các phần tử trên trang để cập nhật
+            const productNameEl = document.getElementById('product-detail-name');
+            const productIdEl = document.getElementById('product-detail-id');
+            const productPriceEl = document.getElementById('product-detail-price');
+            const productDescEl = document.getElementById('product-detail-description');
+            const productImageEl = document.getElementById('product-detail-image');
+            const quantityInput = document.getElementById('quantity');
+            const addToCartButton = document.getElementById('addToCartDetailButton');
+            const feedbackEl = document.getElementById('addToCartFeedback');
+            const cartBadge = document.getElementById('cartItemCount'); // Navbar badge
+            const productNotFoundEl = document.getElementById('productNotFound');
+            const breadcrumbNameEl = document.getElementById('product-detail-name-breadcrumb');
+            const relatedProductsContainer = document.getElementById('relatedProductsContainer'); // Container SP liên quan
+
+            let currentProduct = null; // Biến để lưu thông tin sản phẩm hiện tại đang xem
+
+            // --- Các hàm Helper cho giỏ hàng (localStorage) ---
+            // ... (Giữ nguyên các hàm getCart, saveCart, updateCartCount, formatPrice từ trước) ...
+             function getCart() {
+                 const cart = localStorage.getItem('hsuFoodCart');
+                 try { return cart ? JSON.parse(cart) : []; } catch (e) { console.error("Lỗi parse JSON:", e); localStorage.removeItem('hsuFoodCart'); return []; }
+             }
+             function saveCart(cart) {
+                 if (!Array.isArray(cart)) return;
+                 try { localStorage.setItem('hsuFoodCart', JSON.stringify(cart)); updateCartCount(); } catch (e) { console.error("Lỗi localStorage:", e); }
+             }
+             function updateCartCount() {
+                 const cart = getCart(); let totalQuantity = 0;
+                 if (Array.isArray(cart)) { cart.forEach(item => { if (item && typeof item.quantity === 'number') { totalQuantity += item.quantity; } }); }
+                 if (cartBadge) { cartBadge.textContent = totalQuantity; }
+             }
+             function formatPrice(price) {
+                 if (isNaN(price) || price === null) return '0đ';
+                 return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+             }
+
+            // --- Lấy Product ID từ URL ---
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            // --- Cơ sở dữ liệu giả lập (Đã có từ trước) ---
+            const dummyDatabase = {
+                // Bia
+                'bia01': { name: 'Bia Heineken Lon', price: 18000, description: 'Heineken bạc sảng khoái, chuẩn vị Hà Lan.', image: 'images/bia_heineken.jpg' },
+                'bia02': { name: 'Bia Tiger Crystal', price: 17000, description: 'Tiger bạc đậm đà, dễ uống, công nghệ lên men lạnh.', image: 'images/bia_tiger_crystal.jpg' },
+                'bia03': { name: 'Bia Saigon Special', price: 15000, description: 'Bia Saigon lùn quen thuộc, hương vị đậm đà.', image: 'images/bia_saigon.jpg' },
+                'bia04': { name: 'Bia Budweiser Lon', price: 20000, description: 'Vua của các loại bia, hương vị nồng nàn.', image: 'images/bia_budweiser.jpg' },
+                // Nước suối
+                'suoi01': { name: 'Nước suối Aquafina 500ml', price: 5000, description: 'Nước tinh khiết đóng chai tiện lợi, vị ngon tinh khiết.', image: 'images/nuoc_suoi_aquafina.jpg' },
+                'suoi02': { name: 'Nước khoáng La Vie 500ml', price: 6000, description: 'Nước khoáng thiên nhiên, bổ sung khoáng chất.', image: 'https://nuockhoangducphat.com/wp-content/uploads/2013/06/lavie15lit.jpg' },
+                'suoi03': { name: 'Nước khoáng Vĩnh Hảo 500ml', price: 5500, description: 'Nước khoáng có ga nhẹ tự nhiên.', image: 'images/nuoc_suoi_vinhhao.jpg' },
+                'suoi04': { name: 'Nước tinh khiết Dasani 500ml', price: 4500, description: 'Thiết kế chai tiện dụng, dễ mang theo.', image: 'images/nuoc_suoi_dasani.jpg' },
+                // Nước ngọt
+                'nuoc01': { name: 'Coca Cola Lon', price: 10000, description: 'Nước ngọt có gaz vị Cola truyền thống, giải khát tức thì.', image: 'images/coca_cola.jpg' },
+                'nuoc02': { name: 'Pepsi Lon', price: 10000, description: 'Nước ngọt có gaz Pepsi sảng khoái bất tận.', image: 'images/pepsi.jpg' },
+                'nuoc03': { name: '7 Up Lon', price: 10000, description: 'Nước ngọt vị chanh thanh mát, không chứa caffeine.', image: 'images/7up.jpg' },
+                'nuoc04': { name: 'Sting Dâu Chai', price: 12000, description: 'Nước tăng lực vị dâu thơm ngon, bổ sung năng lượng.', image: 'images/sting_dau.jpg' },
+                // Bánh tráng trộn
+                'btt01': { name: 'Bánh tráng trộn thập cẩm', price: 20000, description: 'Đầy đủ xoài, trứng cút, khô bò, rau răm, đậu phộng, nước sốt đậm đà.', image: 'images/banh_trang_tron_thap_cam.jpg' },
+                'btt02': { name: 'Bánh tráng cuốn bơ', price: 22000, description: 'Bánh tráng cuốn sốt bơ béo ngậy, thơm lừng, ăn là ghiền.', image: 'images/banh_trang_cuon.jpg' },
+                'btt03': { name: 'Bánh tráng Long An', price: 15000, description: 'Bánh tráng mỏng, muối tôm Tây Ninh cay cay, chấm hoặc trộn đều ngon.', image: 'images/banh_trang_long_an.jpg' },
+                'btt04': { name: 'Bánh tráng phơi sương muối nhuyễn', price: 18000, description: 'Bánh dẻo đặc trưng, ăn kèm muối nhuyễn siêu cay.', image: 'images/banh_trang_phoi_suong.jpg' },
+                'btt05': { name: 'Bánh tráng trộn sa tế bò', price: 25000, description: 'Vị sa tế cay nồng hấp dẫn, kết hợp cùng khô bò dai dai.', image: 'images/banh_trang_tron_sate.jpg' },
+                'btt06': { name: 'Bánh tráng nướng Đà Lạt', price: 20000, description: 'Giòn rụm như pizza phiên bản Việt, topping mỡ hành, trứng cút, tép khô.', image: 'images/banh_trang_nuong.jpg' },
+                'btt07': { name: 'Bánh tráng me', price: 15000, description: 'Chấm cùng nước sốt me chua ngọt đặc sệt, thêm đậu phộng bùi bùi.', image: 'images/banh_trang_me.jpg' },
+                'btt10': { name: 'Bánh tráng dẻo tôm cay', price: 15000, description: 'Bánh tráng dẻo, gia vị tôm cay mặn ngọt vừa ăn.', image: 'images/banh_trang_deo_tom.jpg' }
+            };
+
+            function fetchProductDetails(id) { return dummyDatabase[id] || null; }
+
+            // --- **** BỔ SUNG: Hàm hiển thị sản phẩm liên quan **** ---
+            function displayRelatedProducts(currentProductId) {
+                if (!relatedProductsContainer) return; // Nếu không có container thì thoát
+
+                const allProductIds = Object.keys(dummyDatabase);
+                const relatedIds = allProductIds
+                                    .filter(id => id !== currentProductId) // Loại trừ sản phẩm hiện tại
+                                    .sort(() => 0.5 - Math.random()) // Xáo trộn ngẫu nhiên
+                                    .slice(0, 4); // Lấy 4 sản phẩm đầu tiên
+
+                relatedProductsContainer.innerHTML = ''; // Xóa nội dung placeholder cũ
+
+                if (relatedIds.length === 0) {
+                    relatedProductsContainer.innerHTML = '<p class="col-12 text-muted text-center">Không có sản phẩm liên quan nào.</p>';
+                    return;
+                }
+
+                relatedIds.forEach(relatedId => {
+                    const product = dummyDatabase[relatedId];
+                    if (product) {
+                        const productHTML = `
+                            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                                <div class="product-item h-100">
+                                    <div class="product-img">
+                                        <img src="${product.image}" class="img-fluid" alt="${product.name}" onerror="this.src='images/placeholder.png';">
+                                    </div>
+                                    <div class="product-info">
+                                        <h4><a href="product-detail.html?id=${relatedId}">${product.name}</a></h4>
+                                        <div class="price">${formatPrice(product.price)}</div>
+                                        <div class="product-actions">
+                                            <a href="product-detail.html?id=${relatedId}" class="btn btn-outline-secondary btn-sm" title="Chi tiết"><i class="fas fa-eye"></i></a>
+                                            <button class="btn btn-danger btn-sm add-to-cart-btn" title="Thêm vào giỏ" data-product-id="${relatedId}" data-product-name="${product.name}" data-product-price="${product.price}"><i class="fas fa-cart-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        relatedProductsContainer.insertAdjacentHTML('beforeend', productHTML);
+                    }
+                });
+            }
+             // --- **** Hết hàm hiển thị sản phẩm liên quan **** ---
+
+
+            // --- Tải và hiển thị chi tiết sản phẩm chính ---
+            if (productId) {
+                currentProduct = fetchProductDetails(productId);
+
+                if (currentProduct) {
+                    // Cập nhật nội dung trang (như cũ)
+                    document.title = currentProduct.name + " - HSU FOOD";
+                    if(breadcrumbNameEl) breadcrumbNameEl.textContent = currentProduct.name;
+                    if(productNameEl) productNameEl.textContent = currentProduct.name;
+                    if(productIdEl) productIdEl.textContent = `Mã sản phẩm: ${productId.toUpperCase()}`;
+                    if(productPriceEl) productPriceEl.textContent = formatPrice(currentProduct.price);
+                    if(productDescEl) productDescEl.textContent = currentProduct.description;
+                    if(productImageEl) {
+                        productImageEl.src = currentProduct.image;
+                        productImageEl.alt = currentProduct.name;
+                    }
+                    if(addToCartButton) addToCartButton.disabled = false;
+                    if(productNotFoundEl) productNotFoundEl.style.display = 'none';
+
+                    // **** GỌI HÀM HIỂN THỊ SẢN PHẨM LIÊN QUAN ****
+                    displayRelatedProducts(productId);
+
+                } else {
+                   
+                     if(breadcrumbNameEl) breadcrumbNameEl.textContent = "Lỗi";
+                    if(productNameEl) productNameEl.textContent = "Không tìm thấy sản phẩm";
+                    if(productDescEl) productDescEl.textContent = "Sản phẩm bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.";
+                    if(productImageEl) productImageEl.src = 'images/placeholder.png';
+                    if(addToCartButton) addToCartButton.disabled = true;
+                    if(productNotFoundEl) productNotFoundEl.style.display = 'block';
+                    console.error("Không tìm thấy sản phẩm với ID:", productId);
+                     // Cũng ẩn mục liên quan nếu sản phẩm chính lỗi
+                     if(relatedProductsContainer) relatedProductsContainer.innerHTML = '';
+                }
+            } else {
+                 // Không có ID trên URL (như cũ)
+                
+                 if(breadcrumbNameEl) breadcrumbNameEl.textContent = "Lỗi";
+                 if(productNameEl) productNameEl.textContent = "Lỗi URL";
+                 if(productDescEl) productDescEl.textContent = "Không có ID sản phẩm được chỉ định trong địa chỉ trang.";
+                 if(productImageEl) productImageEl.src = 'images/placeholder.png';
+                 if(addToCartButton) addToCartButton.disabled = true;
+                 if(productNotFoundEl) productNotFoundEl.style.display = 'block';
+                 console.error("Không tìm thấy 'id' trong URL parameter.");
+                  // Cũng ẩn mục liên quan nếu URL lỗi
+                  if(relatedProductsContainer) relatedProductsContainer.innerHTML = '';
+            }
+
+             // --- Xử lý nút "Thêm vào giỏ hàng" (như cũ) ---
+             if (addToCartButton) {
+                  addToCartButton.addEventListener('click', function() {
+                      // ... (giữ nguyên code xử lý thêm vào giỏ) ...
+                       if (!currentProduct) { alert("Lỗi: Không có thông tin sản phẩm."); return; }
+                       const quantity = parseInt(quantityInput.value);
+                       if (isNaN(quantity) || quantity < 1) { alert("Vui lòng nhập số lượng hợp lệ."); quantityInput.focus(); quantityInput.select(); return; }
+                       let cart = getCart();
+                       const existingItemIndex = cart.findIndex(item => item.id === productId);
+                       if (existingItemIndex > -1) { cart[existingItemIndex].quantity += quantity; } else { cart.push({ id: productId, name: currentProduct.name, price: currentProduct.price, quantity: quantity }); }
+                       saveCart(cart);
+                       feedbackEl.textContent = `Đã thêm ${quantity} "${currentProduct.name}" vào giỏ!`;
+                       feedbackEl.style.display = 'block';
+                       addToCartButton.disabled = true;
+                       setTimeout(() => { feedbackEl.style.display = 'none'; addToCartButton.disabled = false; }, 2500);
+                  });
+              }
+
+            // --- Khởi tạo số lượng trên Navbar ---
+            updateCartCount();
+
+        });
+
+
+    </script>
+
+     </body>
+</html>

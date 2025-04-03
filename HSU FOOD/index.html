@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <title>HSU FOOD - Giao hàng tận nơi</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm"> <div class="container">
+            <a class="navbar-brand font-weight-bold" href="index.html">HSU FOOD</a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Trang chủ</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           Danh mục
+                         </a>
+                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                           <a class="dropdown-item" href="#bia">Bia các loại</a>
+                           <a class="dropdown-item" href="#nuoc-suoi">Nước suối</a>
+                           <a class="dropdown-item" href="#nuoc-ngot">Nước ngọt</a>
+                           <a class="dropdown-item" href="#banh-trang">Bánh tráng trộn</a>
+                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="flash-sale.html">Khuyến mãi</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#">Liên hệ</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html" id="navCartLink">
+                            <i class="fas fa-shopping-cart fa-lg"></i>
+                            <span class="badge badge-danger" id="cartItemCount">0</span>
+                        </a>
+                    </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="accountDropdownNav" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user fa-lg"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownNav">
+                            <a class="dropdown-item" href="login.html">Đăng nhập</a>
+                            <a class="dropdown-item" href="register.html">Đăng ký</a>
+                             <div class="dropdown-divider"></div>
+                             <a class="dropdown-item" href="order-status.html">Kiểm tra đơn hàng</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section id="heroCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#heroCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#heroCarousel" data-slide-to="1"></li>
+            <li data-target="#heroCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+             <div class="carousel-item active" style="background-image: url('images/slide-1.jpg');">
+                 <div class="carousel-caption d-none d-md-block">
+                    <h2>Bia Lạnh Sảng Khoái</h2>
+                    <p>Giải nhiệt mùa hè, giao hàng trong 30 phút!</p>
+                    <a href="#bia" class="btn btn-danger btn-lg">Xem Ngay</a>
+                </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('images/slide-2.jpg');">
+                <div class="carousel-caption d-none d-md-block">
+                    <h2>Nước Ngọt Đủ Loại</h2>
+                    <p>Từ Coca, Pepsi đến các loại trà thanh mát.</p>
+                    <a href="#nuoc-ngot" class="btn btn-danger btn-lg">Khám Phá</a>
+                </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('images/slide-3.jpg');">
+                 <div class="carousel-caption d-none d-md-block">
+                    <h2>Bánh Tráng Trộn Siêu Ngon</h2>
+                    <p>Ăn vặt cực đã, topping đầy ụ.</p>
+                    <a href="#banh-trang" class="btn btn-danger btn-lg">Đặt Hàng</a>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+             <span class="carousel-control-next-icon" aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </section>
+    <main id="main">
+        <section id="products" class="products py-5">
+            <div class="container">
+
+                <div class="section-title">
+                    <h2>Sản phẩm nổi bật</h2>
+                    <p>Các loại bia, nước ngọt, nước suối và bánh tráng được yêu thích nhất</p>
+                </div>
+
+                <div class="row">
+
+                    <h3 class="col-12 mb-4 category-title" id="bia"><i class="fas fa-beer"></i> Bia Các Loại</h3>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/bia_heineken.jpg" class="img-fluid" alt="Heineken" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=bia01">Bia Heineken Lon</a></h4>
+                                <span class="product-category">Bia</span>
+                                <div class="price">18.000đ</div>
+                                <div class="product-actions">
+                                    <a href="product-detail.html?id=bia01" class="btn btn-outline-secondary btn-sm" title="Chi tiết"><i class="fas fa-eye"></i></a>
+                                    <button class="btn btn-danger btn-sm add-to-cart-btn" title="Thêm vào giỏ"
+                                            data-product-id="bia01"
+                                            data-product-name="Bia Heineken Lon"
+                                            data-product-price="18000">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                         <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/bia_tiger_crystal.jpg" class="img-fluid" alt="Tiger" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=bia02">Bia Tiger Crystal</a></h4>
+                                <span class="product-category">Bia</span>
+                                <div class="price">17.000đ</div>
+                                 <div class="product-actions">
+                                    <a href="product-detail.html?id=bia02" class="btn btn-outline-secondary btn-sm" title="Chi tiết"><i class="fas fa-eye"></i></a>
+                                    <button class="btn btn-danger btn-sm add-to-cart-btn" title="Thêm vào giỏ"
+                                            data-product-id="bia02"
+                                            data-product-name="Bia Tiger Crystal"
+                                            data-product-price="17000">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/bia_saigon_special.jpg" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';" class="img-fluid" alt="Saigon">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=bia03">Bia Saigon Special</a></h4>
+                                <span class="product-category">Bia</span>
+                                <div class="price">15.000đ</div>
+                                <div class="product-actions">
+                                    <a href="product-detail.html?id=bia03" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                    <button class="btn btn-sm btn-danger add-to-cart-btn" data-product-id="bia03" data-product-name="Bia Saigon Special" data-product-price="15000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/bia_budweiser.jpg" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';" class="img-fluid" alt="Budweiser">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=bia04">Bia Budweiser Lon</a></h4>
+                                <span class="product-category">Bia</span>
+                                <div class="price">20.000đ</div>
+                                <div class="product-actions">
+                                    <a href="product-detail.html?id=bia04" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                    <button class="btn btn-sm btn-danger add-to-cart-btn" data-product-id="bia04" data-product-name="Bia Budweiser Lon" data-product-price="20000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="col-12 mt-5 mb-4 category-title" id="nuoc-suoi"><i class="fas fa-tint"></i> Nước Suối</h3>
+                     <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/nuoc-suoi-aquafina-chai-500ml-2.jpg" class="img-fluid" alt="Aquafina" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=suoi01">Nước suối Aquafina 500ml</a></h4>
+                                 <span class="product-category">Nước suối</span>
+                                <div class="price">5.000đ</div>
+                                 <div class="product-actions">
+                                    <a href="product-detail.html?id=suoi01" class="btn btn-outline-secondary btn-sm" title="Chi tiết"><i class="fas fa-eye"></i></a>
+                                    <button class="btn btn-danger btn-sm add-to-cart-btn" title="Thêm vào giỏ" data-product-id="suoi01" data-product-name="Nước suối Aquafina 500ml" data-product-price="5000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-3 col-md-4 col-sm-6">
+                         <div class="product-item">
+                            <div class="product-img">
+                                <img src="https://nuockhoangducphat.com/wp-content/uploads/2013/06/lavie15lit.jpg" class="img-fluid" alt="La Vie" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=suoi02">Nước khoáng La Vie 500ml</a></h4>
+                                <span class="product-category">Nước suối</span>
+                                <div class="price">6.000đ</div>
+                                 <div class="product-actions">
+                                    <a href="product-detail.html?id=suoi02" class="btn btn-outline-secondary btn-sm" title="Chi tiết"><i class="fas fa-eye"></i></a>
+                                     <button class="btn btn-danger btn-sm add-to-cart-btn" title="Thêm vào giỏ" data-product-id="suoi02" data-product-name="Nước khoáng La Vie 500ml" data-product-price="6000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/nuoc_suoi_vinhhao.jpg" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';" class="img-fluid" alt="Vĩnh Hảo">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=suoi03">Nước khoáng Vĩnh Hảo 500ml</a></h4>
+                                <span class="product-category">Nước suối</span>
+                                <div class="price">5.500đ</div>
+                                <div class="product-actions">
+                                    <a href="product-detail.html?id=suoi03" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                    <button class="btn btn-sm btn-danger add-to-cart-btn" data-product-id="suoi03" data-product-name="Nước khoáng Vĩnh Hảo 500ml" data-product-price="5500"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/nuoc_suoi_dasani.jpg" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';" class="img-fluid" alt="Dasani">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=suoi04">Nước tinh khiết Dasani 500ml</a></h4>
+                                <span class="product-category">Nước suối</span>
+                                <div class="price">4.500đ</div>
+                                <div class="product-actions">
+                                    <a href="product-detail.html?id=suoi04" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                    <button class="btn btn-sm btn-danger add-to-cart-btn" data-product-id="suoi04" data-product-name="Nước tinh khiết Dasani 500ml" data-product-price="4500"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="col-12 mt-5 mb-4 category-title" id="nuoc-ngot"><i class="fas fa-cocktail"></i> Nước Ngọt</h3>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                       <div class="product-item">
+                           <div class="product-img">
+                               <img src="images/coca_cola.jpg" class="img-fluid" alt="Coca Cola" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';">
+                           </div>
+                           <div class="product-info">
+                               <h4><a href="product-detail.html?id=nuoc01">Coca Cola Lon</a></h4>
+                               <span class="product-category">Nước ngọt</span>
+                               <div class="price">10.000đ</div>
+                                <div class="product-actions">
+                                    <a href="product-detail.html?id=nuoc01" class="btn btn-outline-secondary btn-sm" title="Chi tiết"><i class="fas fa-eye"></i></a>
+                                     <button class="btn btn-danger btn-sm add-to-cart-btn" title="Thêm vào giỏ" data-product-id="nuoc01" data-product-name="Coca Cola Lon" data-product-price="10000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                           </div>
+                       </div>
+                    </div>
+                     <div class="col-lg-3 col-md-4 col-sm-6">
+                         <div class="product-item">
+                           <div class="product-img">
+                               <img src="https://product.hstatic.net/200000534989/product/dsc08410-enhanced-nr_1_81edadf400df40fcbdcca8749abcbb90_master.jpg" class="img-fluid" alt="Pepsi" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';">
+                           </div>
+                           <div class="product-info">
+                               <h4><a href="product-detail.html?id=nuoc02">Pepsi Lon</a></h4>
+                                <span class="product-category">Nước ngọt</span>
+                               <div class="price">10.000đ</div>
+                                 <div class="product-actions">
+                                    <a href="product-detail.html?id=nuoc02" class="btn btn-outline-secondary btn-sm" title="Chi tiết"><i class="fas fa-eye"></i></a>
+                                     <button class="btn btn-danger btn-sm add-to-cart-btn" title="Thêm vào giỏ" data-product-id="nuoc02" data-product-name="Pepsi Lon" data-product-price="10000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                           </div>
+                       </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                         <div class="product-item">
+                             <div class="product-img">
+                                 <img src="images/7up.jpg" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';" class="img-fluid" alt="7 Up">
+                            </div>
+                             <div class="product-info">
+                                 <h4><a href="product-detail.html?id=nuoc03">7 Up Lon</a></h4>
+                                 <span class="product-category">Nước ngọt</span>
+                                 <div class="price">10.000đ</div>
+                                 <div class="product-actions">
+                                     <a href="product-detail.html?id=nuoc03" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                     <button class="btn btn-sm btn-danger add-to-cart-btn" data-product-id="nuoc03" data-product-name="7 Up Lon" data-product-price="10000"><i class="fas fa-cart-plus"></i></button>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                         <div class="product-item">
+                             <div class="product-img">
+                                 <img src="images/sting_dau.jpg" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';" class="img-fluid" alt="Sting">
+                            </div>
+                             <div class="product-info">
+                                 <h4><a href="product-detail.html?id=nuoc04">Sting Dâu Chai</a></h4>
+                                 <span class="product-category">Nước ngọt</span>
+                                 <div class="price">12.000đ</div>
+                                 <div class="product-actions">
+                                     <a href="product-detail.html?id=nuoc04" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                     <button class="btn btn-sm btn-danger add-to-cart-btn" data-product-id="nuoc04" data-product-name="Sting Dâu Chai" data-product-price="12000"><i class="fas fa-cart-plus"></i></button>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="col-12 mt-5 mb-4 category-title" id="banh-trang"><i class="fas fa-drumstick-bite"></i> Bánh Tráng Trộn</h3>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                         <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/banh_trang_tron_thap_cam.jpg" class="img-fluid" alt="BTT Thập Cẩm" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=btt01">Bánh tráng trộn thập cẩm</a></h4>
+                                <span class="product-category">Bánh tráng</span>
+                                <div class="price">20.000đ</div>
+                                 <div class="product-actions">
+                                    <a href="product-detail.html?id=btt01" class="btn btn-outline-secondary btn-sm" title="Chi tiết"><i class="fas fa-eye"></i></a>
+                                     <button class="btn btn-danger btn-sm add-to-cart-btn" title="Thêm vào giỏ" data-product-id="btt01" data-product-name="Bánh tráng trộn thập cẩm" data-product-price="20000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item">
+                           <div class="product-img">
+                               <img src="images/banh_trang_cuon.jpg" class="img-fluid" alt="BTT Cuốn" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';">
+                           </div>
+                           <div class="product-info">
+                               <h4><a href="product-detail.html?id=btt02">Bánh tráng cuốn bơ</a></h4>
+                               <span class="product-category">Bánh tráng</span>
+                               <div class="price">22.000đ</div>
+                                <div class="product-actions">
+                                    <a href="product-detail.html?id=btt02" class="btn btn-outline-secondary btn-sm" title="Chi tiết"><i class="fas fa-eye"></i></a>
+                                    <button class="btn btn-danger btn-sm add-to-cart-btn" title="Thêm vào giỏ" data-product-id="btt02" data-product-name="Bánh tráng cuốn bơ" data-product-price="22000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                           </div>
+                       </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                         <div class="product-item">
+                             <div class="product-img">
+                                 <img src="images/banh_trang_long_an.jpg" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';" class="img-fluid" alt="BTT Long An">
+                             </div>
+                             <div class="product-info">
+                                 <h4><a href="product-detail.html?id=btt03">Bánh tráng Long An</a></h4>
+                                 <span class="product-category">Bánh tráng</span>
+                                 <div class="price">15.000đ</div>
+                                 <div class="product-actions">
+                                     <a href="product-detail.html?id=btt03" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                      <button class="btn btn-sm btn-danger add-to-cart-btn" data-product-id="btt03" data-product-name="Bánh tráng Long An" data-product-price="15000"><i class="fas fa-cart-plus"></i></button>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/banh_trang_phoi_suong.jpg" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';" class="img-fluid" alt="BTT Phơi Sương">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=btt04">Bánh tráng phơi sương muối nhuyễn</a></h4>
+                                <span class="product-category">Bánh tráng</span>
+                                <div class="price">18.000đ</div>
+                                <div class="product-actions">
+                                    <a href="product-detail.html?id=btt04" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                     <button class="btn btn-sm btn-danger add-to-cart-btn" data-product-id="btt04" data-product-name="Bánh tráng phơi sương muối nhuyễn" data-product-price="18000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/banh_trang_tron_sate.jpg" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';" class="img-fluid" alt="BTT Sate">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=btt05">Bánh tráng trộn sa tế bò</a></h4>
+                                <span class="product-category">Bánh tráng</span>
+                                <div class="price">25.000đ</div>
+                                <div class="product-actions">
+                                    <a href="product-detail.html?id=btt05" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                     <button class="btn btn-sm btn-danger add-to-cart-btn" data-product-id="btt05" data-product-name="Bánh tráng trộn sa tế bò" data-product-price="25000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/banh_trang_nuong.jpg" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';" class="img-fluid" alt="BTT Nướng">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=btt06">Bánh tráng nướng Đà Lạt</a></h4>
+                                <span class="product-category">Bánh tráng</span>
+                                <div class="price">20.000đ</div>
+                                <div class="product-actions">
+                                    <a href="product-detail.html?id=btt06" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                     <button class="btn btn-sm btn-danger add-to-cart-btn" data-product-id="btt06" data-product-name="Bánh tráng nướng Đà Lạt" data-product-price="20000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/banh_trang_me.jpg" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';" class="img-fluid" alt="BTT Me">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=btt07">Bánh tráng me</a></h4>
+                                <span class="product-category">Bánh tráng</span>
+                                <div class="price">15.000đ</div>
+                                <div class="product-actions">
+                                    <a href="product-detail.html?id=btt07" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                     <button class="btn btn-sm btn-danger add-to-cart-btn" data-product-id="btt07" data-product-name="Bánh tráng me" data-product-price="15000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <img src="images/banh_trang_deo_tom.jpg" onerror="this.src='https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-picture-icon-png-image_4013511.jpg';" class="img-fluid" alt="BTT Dẻo Tôm">
+                            </div>
+                            <div class="product-info">
+                                <h4><a href="product-detail.html?id=btt10">Bánh tráng dẻo tôm cay</a></h4>
+                                <span class="product-category">Bánh tráng</span>
+                                <div class="price">15.000đ</div>
+                                <div class="product-actions">
+                                    <a href="product-detail.html?id=btt10" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                    <button class="btn btn-sm btn-danger add-to-cart-btn" data-product-id="btt10" data-product-name="Bánh tráng dẻo tôm cay" data-product-price="15000"><i class="fas fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> </div> </section>
+        </main><footer id="footer">
+        <div class="footer-top"> <div class="container"> <div class="row"> <div class="col-lg-4 col-md-6 footer-contact"><h4>HSU FOOD</h4><p>123 Đường ABC <br>Phường XYZ, Quận 1<br>TP. Hồ Chí Minh <br><br><strong>Điện thoại:</strong> 0987 654 321<br><strong>Email:</strong> info@hsufood.example.com<br></p></div> <div class="col-lg-2 col-md-6 footer-links"><h4>Liên kết</h4><ul><li><i class="fas fa-chevron-right"></i> <a href="#">Trang chủ</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Giới thiệu</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Dịch vụ</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Điều khoản</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Chính sách bảo mật</a></li></ul></div> <div class="col-lg-3 col-md-6 footer-links"><h4>Sản phẩm</h4><ul><li><i class="fas fa-chevron-right"></i> <a href="#bia">Bia các loại</a></li><li><i class="fas fa-chevron-right"></i> <a href="#nuoc-suoi">Nước suối</a></li><li><i class="fas fa-chevron-right"></i> <a href="#nuoc-ngot">Nước ngọt</a></li><li><i class="fas fa-chevron-right"></i> <a href="#banh-trang">Bánh tráng trộn</a></li><li><i class="fas fa-chevron-right"></i> <a href="#">Snack ăn vặt</a></li></ul></div> <div class="col-lg-3 col-md-6 footer-newsletter"><h4>Đăng ký nhận tin</h4><p>Nhập email để nhận thông tin khuyến mãi mới nhất</p><form action="" method="post"><input type="email" name="email" class="form-control mb-2"><input type="submit" value="Đăng ký" class="btn btn-danger"></form><div class="social-links mt-3"><a href="#" class="twitter"><i class="fab fa-twitter"></i></a> <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a> <a href="#" class="instagram"><i class="fab fa-instagram"></i></a> <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a></div></div> </div> </div> </div>
+        <div class="container"> <div class="copyright">&copy; Copyright <strong><span>HSU FOOD</span></strong>. All Rights Reserved</div> <div class="credits"></div> </div>
+    </footer>
+// --- **** BỔ SUNG: logo **** ---
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const brand = document.querySelector('.navbar-brand');
+    if (brand) {
+        brand.innerHTML = '<img src="images/logo-hsu-food.png" alt="HSU FOOD" height="200px">';
+    }
+});
+</script>    
+// --- **** kết thúc chèn logo **** ---
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+
+   
+
+ <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const cartBadge = document.getElementById('cartItemCount'); // Lấy thẻ span hiển thị số lượng
+
+        // Hàm lấy giỏ hàng từ localStorage
+        function getCart() {
+          const cart = localStorage.getItem('hsuFoodCart');
+          return cart ? JSON.parse(cart) : [];
+        }
+
+        // Hàm lưu giỏ hàng vào localStorage
+        function saveCart(cart) {
+          localStorage.setItem('hsuFoodCart', JSON.stringify(cart));
+          updateCartCount(); // Gọi cập nhật số lượng sau khi lưu
+        }
+
+        // Hàm cập nhật số lượng hiển thị trên icon giỏ hàng
+        function updateCartCount() {
+          const cart = getCart();
+          let totalQuantity = 0;
+          cart.forEach(item => {
+            totalQuantity += item.quantity; // Cộng dồn số lượng của từng sản phẩm
+          });
+          if (cartBadge) {
+              cartBadge.textContent = totalQuantity; // Cập nhật số hiển thị
+          }
+        }
+
+        // --- Khởi tạo số lượng giỏ hàng khi tải trang ---
+        updateCartCount();
+
+        // --- Gắn sự kiện click cho các nút "Thêm vào giỏ" ---
+        document.body.addEventListener('click', function(event) {
+          // Kiểm tra xem phần tử được click có phải là nút thêm vào giỏ không
+          const button = event.target.closest('.add-to-cart-btn');
+
+          if (button) {
+            event.preventDefault(); // Ngăn hành vi mặc định nếu có
+
+            // Lấy thông tin sản phẩm từ data attributes của nút
+            const productId = button.dataset.productId;
+            const productName = button.dataset.productName;
+            const productPrice = parseFloat(button.dataset.productPrice);
+
+            // Kiểm tra dữ liệu có hợp lệ không
+            if (!productId || !productName || isNaN(productPrice)) {
+                console.error("Thiếu thông tin sản phẩm trên nút:", button);
+                return;
+            }
+
+            // Lấy giỏ hàng hiện tại
+            let cart = getCart();
+
+            // Tìm sản phẩm trong giỏ
+            const existingItemIndex = cart.findIndex(item => item.id === productId);
+
+            if (existingItemIndex > -1) {
+              // Nếu đã có, tăng số lượng
+              cart[existingItemIndex].quantity += 1;
+            } else {
+              // Nếu chưa có, thêm sản phẩm mới vào giỏ
+              cart.push({
+                id: productId,
+                name: productName,
+                price: productPrice,
+                quantity: 1 // Số lượng ban đầu là 1
+              });
+            }
+
+            // Lưu giỏ hàng đã cập nhật
+            saveCart(cart);
+
+            // (Tùy chọn) Phản hồi cho người dùng
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Đã thêm!';
+            button.disabled = true;
+            setTimeout(() => {
+              button.innerHTML = originalText;
+              button.disabled = false;
+            }, 1500);
+          }
+        });
+
+      });
+    </script>
+     </body>
+</html>

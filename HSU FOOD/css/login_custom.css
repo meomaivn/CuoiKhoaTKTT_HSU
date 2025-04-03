@@ -1,0 +1,221 @@
+/* =======================================================
+   Custom CSS for HSU FOOD Login Page (Inspired by Colorlib Login V6)
+   ======================================================= */
+
+/* --- Google Font --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body, html {
+    height: 100%;
+    font-family: 'Poppins', sans-serif; /* Use Poppins font */
+    margin: 0;
+}
+
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container-login {
+    width: 100%;
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    /* --- Background Gradient (Example - adjust colors as needed) --- */
+    background: #C33764;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #1D2671, #C33764);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #1D2671, #C33764); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* Or use a background image: */
+    /* background-image: url('../images/login-bg.jpg'); */
+    /* background-size: cover; */
+    /* background-position: center; */
+}
+
+.wrap-login {
+    width: 450px; /* Form width */
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 55px 55px 37px 55px;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+
+/* --- Form Styling --- */
+.login-form {
+    width: 100%;
+}
+
+.login-form-title {
+    display: block;
+    font-size: 30px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: center;
+    padding-bottom: 40px; /* Increased padding */
+    font-weight: 600;
+}
+
+/* Input field wrapper */
+.wrap-input {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px solid #d9d9d9; /* Underline effect */
+    margin-bottom: 25px; /* Spacing */
+}
+
+.input-label { /* Optional: if using labels above inputs */
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    padding-left: 7px;
+}
+
+.input-field {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    height: 50px; /* Input height */
+    background: transparent; /* Transparent background */
+    padding: 0 7px 0 43px; /* Padding left for icon */
+    border: none; /* Remove default border */
+    outline: none; /* Remove outline on focus */
+}
+
+/* Input icon */
+.input-icon {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none; /* Icon doesn't block input */
+    color: #666666;
+    padding-left: 5px; /* Position icon */
+    display: flex;
+    align-items: center; /* Center icon vertically */
+    font-size: 18px;
+}
+
+/* Focus effect for input */
+.input-field:focus + .input-icon {
+    color: #C33764; /* Change icon color on focus (match gradient) */
+}
+
+.input-field:focus {
+    border-color: transparent !important; /* Keep border transparent on focus */
+    box-shadow: none !important; /* Remove Bootstrap focus shadow */
+}
+
+.wrap-input .input-field:focus ~ .focus-input,
+.wrap-input .input-field:not(:placeholder-shown) ~ .focus-input { /* Show line animation */
+    width: 100%;
+}
+
+.focus-input { /* Animated underline */
+    position: absolute;
+    display: block;
+    width: 0; /* Start with 0 width */
+    height: 2px;
+    bottom: -2px; /* Position below the border-bottom */
+    left: 0;
+    background: #C33764; /* Match gradient color */
+    transition: width 0.4s; /* Animation */
+}
+
+
+/* Checkbox styling */
+.contact-form-checkbox {
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 35px;
+    font-size: 14px;
+    color: #555;
+}
+.contact-form-checkbox .form-check-input { /* Use Bootstrap's custom checkbox */
+    margin-top: 0.2rem;
+}
+
+/* Button container */
+.container-login-form-btn {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.login-form-btn {
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px; /* Rounded button */
+    /* Button gradient - match background */
+    background: #C33764;
+    background: -webkit-linear-gradient(to right, #1D2671, #C33764);
+    background: linear-gradient(to right, #1D2671, #C33764);
+    background-size: 200% auto; /* For hover effect */
+
+    box-shadow: 0 10px 30px 0px rgba(195, 55, 100, 0.5); /* Button shadow */
+    -moz-box-shadow: 0 10px 30px 0px rgba(195, 55, 100, 0.5);
+    -webkit-box-shadow: 0 10px 30px 0px rgba(195, 55, 100, 0.5);
+    -o-box-shadow: 0 10px 30px 0px rgba(195, 55, 100, 0.5);
+    -ms-box-shadow: 0 10px 30px 0px rgba(195, 55, 100, 0.5);
+
+    transition: all 0.4s;
+}
+
+.login-form-btn:hover {
+    background-position: right center; /* Change gradient direction */
+    color: #fff;
+    box-shadow: 0 10px 30px 0px rgba(29, 38, 113, 0.5); /* Change shadow color */
+}
+
+
+/* Text links below button */
+.text-center {
+    text-align: center;
+}
+.txt1 {
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.5;
+}
+.txt2 {
+    font-size: 14px;
+    color: #333333;
+    line-height: 1.5;
+    font-weight: 500;
+    text-decoration: none;
+}
+.txt2:hover {
+    text-decoration: underline;
+}
+/* --- Validation Error Styling --- */
+.wrap-input.input-invalid {
+    border-bottom-color: #dc3545; /* Red border bottom for invalid */
+}
+
+.wrap-input.input-invalid .input-icon {
+    color: #dc3545; /* Red icon for invalid */
+}
+
+/* Optional: Change focus animation color when invalid */
+/*
+.wrap-input.input-invalid .input-field:focus ~ .focus-input {
+    background: #dc3545;
+}
+*/
