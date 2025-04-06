@@ -65,10 +65,12 @@ h1, h2, h3, h4, h5, h6 {
 /* --- Hero Carousel --- */
 #heroCarousel .carousel-item {
     height: 60vh; /* Adjust height as needed */
-    min-height: 400px;
+    width: 1400px;
+   
     background-size: cover;
     background-position: center;
     position: relative;
+    margin: 0 auto; 
 }
 
 #heroCarousel .carousel-item::before { /* Dark overlay */
