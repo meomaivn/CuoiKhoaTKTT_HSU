@@ -1,5 +1,5 @@
 /* =======================================================
-   Custom CSS for HSU FOOD Login Page (Inspired by Colorlib Login V6)
+ CSS for HSU FOOD Login Page 
    ======================================================= */
 
 /* --- Google Font --- */
@@ -24,10 +24,10 @@ body, html {
     justify-content: center;
     align-items: center;
     padding: 15px;
-    /* --- Background Gradient (Example - adjust colors as needed) --- */
+    /* --- Background Gradient  --- */
     background: #C33764;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #1D2671, #C33764);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #1D2671, #C33764); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to right, #1D2671, #A80F2C);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #c82333, #A80F2C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     /* Or use a background image: */
     /* background-image: url('../images/login-bg.jpg'); */
     /* background-size: cover; */
@@ -52,7 +52,7 @@ body, html {
 .login-form-title {
     display: block;
     font-size: 30px;
-    color: #333333;
+    color: #A80F2C;
     line-height: 1.2;
     text-align: center;
     padding-bottom: 40px; /* Increased padding */
@@ -96,7 +96,7 @@ body, html {
     top: 0;
     left: 0;
     pointer-events: none; /* Icon doesn't block input */
-    color: #666666;
+    color: #c82333;
     padding-left: 5px; /* Position icon */
     display: flex;
     align-items: center; /* Center icon vertically */
@@ -142,7 +142,7 @@ body, html {
     margin-top: 0.2rem;
 }
 
-/* Button container */
+/* Nút */
 .container-login-form-btn {
     width: 100%;
     display: flex;
@@ -165,8 +165,8 @@ body, html {
     border-radius: 25px; /* Rounded button */
     /* Button gradient - match background */
     background: #C33764;
-    background: -webkit-linear-gradient(to right, #1D2671, #C33764);
-    background: linear-gradient(to right, #1D2671, #C33764);
+    background: -webkit-linear-gradient(to right, ##c82333, #C33764);
+    background: linear-gradient(to right, ##c82333, #C33764);
     background-size: 200% auto; /* For hover effect */
 
     box-shadow: 0 10px 30px 0px rgba(195, 55, 100, 0.5); /* Button shadow */
@@ -206,14 +206,14 @@ body, html {
 }
 /* --- Validation Error Styling --- */
 .wrap-input.input-invalid {
-    border-bottom-color: #dc3545; /* Red border bottom for invalid */
+    border-bottom-color: #dc3545; /* đánh dấu màu đỏ nếu chưa nhập */
 }
 
 .wrap-input.input-invalid .input-icon {
-    color: #dc3545; /* Red icon for invalid */
+    color: #dc3545; /* Màu đỏ nếu sai */
 }
 
-/* Optional: Change focus animation color when invalid */
+/* Hiển thị màu khung trạng thái */
 /*
 .wrap-input.input-invalid .input-field:focus ~ .focus-input {
     background: #dc3545;
